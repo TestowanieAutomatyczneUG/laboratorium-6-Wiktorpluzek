@@ -4,8 +4,8 @@ import unittest
 class hamming:
     def distance(geneA, geneB):
         distance = 0
-        if geneA=="" and geneB=="":
-            return 0
+        if len(geneA)!=len(geneB):
+            raise(ValueError("Genes cannot be different length"))
         for i in range (0, len(geneA)):
             if geneA[i]==geneB[i]:
                 pass
@@ -31,22 +31,18 @@ class HammingTest(unittest.TestCase):
         self.assertEqual(hamming.distance("GGACGGATTCTG", "AGGACGGATTCT"), 9)
 
     def test_disallow_first_strand_longer(self):
-        self.skipTest("skip")
         with self.assertRaisesWithMessage(ValueError):
             hamming.distance("AATG", "AAA")
 
     def test_disallow_second_strand_longer(self):
-        self.skipTest("skip")
         with self.assertRaisesWithMessage(ValueError):
             hamming.distance("ATA", "AGTG")
 
     def test_disallow_left_empty_strand(self):
-        self.skipTest("skip")
         with self.assertRaisesWithMessage(ValueError):
             hamming.distance("", "G")
 
     def test_disallow_right_empty_strand(self):
-        self.skipTest("skip")
         with self.assertRaisesWithMessage(ValueError):
             hamming.distance("G", "")
 
