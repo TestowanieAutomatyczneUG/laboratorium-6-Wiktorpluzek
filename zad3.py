@@ -17,6 +17,12 @@ text = {
 
 class song:
     def verse(num):
+        if type(num)!=int:
+            if type(num)==float:
+                num=int(num)
+            if type(num)==str:
+                num=float(num)
+                num=int(num)
         if num>12:
             raise Exception("The song has only 12 verses")
         if num<1:
