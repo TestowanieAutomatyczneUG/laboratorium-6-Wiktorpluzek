@@ -48,14 +48,11 @@ class songtest(unittest.TestCase):
     def test_exception_negative_verses(self):
         self.assertRaises(Exception, song.verse, -5)
 
-    @unittest.skip
     def test_float_verse(self):
         self.assertEqual(song.verse(2.0), "On the second day of Christmas my true love gave to me: two Turtle Doves, and a Partridge in a Pear Tree.")
 
-    @unittest.skip
     def test_str_float_verse(self):
         self.assertEqual(song.verse("3.0"), "On the third day of Christmas my true love gave to me: three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.")
 
-    @unittest.skip
     def test_str_letters_verse(self):
         self.assertRaises(Exception, song.verse, "abc")
