@@ -1,28 +1,22 @@
 import unittest
 
+
 def roman(num):
-        if num== 1:
-            return "I"
-        if num==2:
-            return "II"
-        if num==3:
-            return "III"
-        if num==4:
-            return "IV"
-        if num==5:
-            return "V"
-        if num==6:
-            return "VI"
-        if num==7:
-            return "VII"
-        if num==8:
-            return "VIII"
-        if num==9:
-            return "IX"
-        if num==10:
-            return "X"
-
-
+    numeric = [
+        100, 90, 50, 40, 10, 9, 5, 4, 1
+    ]
+    romans = [
+        "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"
+    ]
+    text = ''
+    i = 0
+    while (num > 0):
+        for m in range(0, num // numeric[i]):
+            text += romans[i]
+            num -= numeric[i]
+        i += 1
+    print(text)
+    return text
 
 
 class RomanNumeralsTest(unittest.TestCase):
@@ -47,19 +41,15 @@ class RomanNumeralsTest(unittest.TestCase):
     def test_9_being_10_1_is_ix(self):
         self.assertEqual(roman(9), "IX")
 
-    @unittest.skip
     def test_20_is_two_x_s(self):
         self.assertEqual(roman(27), "XXVII")
 
-    @unittest.skip
     def test_48_is_not_50_2_but_rather_40_8(self):
         self.assertEqual(roman(48), "XLVIII")
 
-    @unittest.skip
     def test_49_is_not_40_5_4_but_rather_50_10_10_1(self):
         self.assertEqual(roman(49), "XLIX")
 
-    @unittest.skip
     def test_50_is_a_single_l(self):
         self.assertEqual(roman(59), "LIX")
 
