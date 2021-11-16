@@ -3,10 +3,10 @@ import unittest
 
 def roman(num):
     numeric = [
-        100, 90, 50, 40, 10, 9, 5, 4, 1
+        1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1
     ]
     romans = [
-        "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"
+        "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"
     ]
     text = ''
     i = 0
@@ -15,7 +15,7 @@ def roman(num):
             text += romans[i]
             num -= numeric[i]
         i += 1
-    print(text)
+
     return text
 
 
@@ -53,34 +53,26 @@ class RomanNumeralsTest(unittest.TestCase):
     def test_50_is_a_single_l(self):
         self.assertEqual(roman(59), "LIX")
 
-    @unittest.skip
     def test_90_being_100_10_is_xc(self):
         self.assertEqual(roman(93), "XCIII")
 
-    @unittest.skip
     def test_100_is_a_single_c(self):
         self.assertEqual(roman(141), "CXLI")
 
-    @unittest.skip
     def test_60_being_50_10_is_lx(self):
         self.assertEqual(roman(163), "CLXIII")
 
-    @unittest.skip
     def test_400_being_500_100_is_cd(self):
         self.assertEqual(roman(402), "CDII")
 
-    @unittest.skip
     def test_500_is_a_single_d(self):
         self.assertEqual(roman(575), "DLXXV")
 
-    @unittest.skip
     def test_900_being_1000_100_is_cm(self):
         self.assertEqual(roman(911), "CMXI")
 
-    @unittest.skip
     def test_1000_is_a_single_m(self):
         self.assertEqual(roman(1024), "MXXIV")
 
-    @unittest.skip
     def test_3000_is_three_m_s(self):
         self.assertEqual(roman(3000), "MMM")
