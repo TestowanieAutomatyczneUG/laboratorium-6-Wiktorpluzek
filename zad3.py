@@ -29,6 +29,34 @@ class song:
             raise Exception("A verse number cannot be negative")
         return text[num]
 
+    def verses(start, stop):
+        if type(start)!=int:
+            if type(start)==float:
+                start=int(start)
+            if type(start)==str:
+                start=float(start)
+                start=int(start)
+        if type(stop)!=int:
+            if type(stop)==float:
+                stop=int(stop)
+            if type(stop)==str:
+                stop=float(stop)
+                stop=int(stop)
+        if start>12 or stop>12:
+            raise Exception("The song has only 12 verses")
+        if start<1 or stop <1:
+            raise Exception("A verse number cannot be negative")
+        if stop<start:
+            raise Exception("Ending verse cannot be before the starting one")
+        lyrics = ""
+        for i in range(start, stop):
+            lyrics += text[i] + '\n'
+        lyrics+= text[stop]
+        return lyrics
+
+
+
+
 
 
 
@@ -45,7 +73,7 @@ class songtest(unittest.TestCase):
     def test_exception_too_many_verses(self):
         self.assertRaises(Exception, song.verse, 13)
 
-    def test_exception_negative_verses(self):
+    def test_exception_negative_verse(self):
         self.assertRaises(Exception, song.verse, -5)
 
     def test_float_verse(self):
@@ -56,3 +84,13 @@ class songtest(unittest.TestCase):
 
     def test_str_letters_verse(self):
         self.assertRaises(Exception, song.verse, "abc")
+
+    def test_1_to_5_verses(self):
+        self.assertEqual(song.verses(1,5), "On the first day of Christmas my true love gave to me: a Partridge in a Pear Tree.\nOn the second day of Christmas my true love gave to me: two Turtle Doves, and a Partridge in a Pear Tree.\nOn the third day of Christmas my true love gave to me: three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.\nOn the fourth day of Christmas my true love gave to me: four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.\nOn the fifth day of Christmas my true love gave to me: five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.")
+
+    def test_exception_wrong_order_verses(self):
+        self.assertRaises(Exception, song.verse, (5,1))
+
+    def test_2_to_2_verses(self):
+        self.assertEqual(song.verses(2,2),
+                         "On the second day of Christmas my true love gave to me: two Turtle Doves, and a Partridge in a Pear Tree.")
